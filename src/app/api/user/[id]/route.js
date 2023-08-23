@@ -7,6 +7,6 @@ export async function GET(request, {params}) {
 
     const user = await getDocument('users', id);
     console.log(user);
-    
-    return NextResponse.json(user);
+
+    return NextResponse.json(user.result);
 }
