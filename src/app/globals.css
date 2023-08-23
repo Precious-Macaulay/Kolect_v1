@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color-rgb: 244, 249, 255
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color-rgb: 244, 249, 255
+  }
+}
+
+body {
+ background-color: rgb(var(--primary-color-rgb));
+ padding: 32px;
+}
