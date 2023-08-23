@@ -7,6 +7,8 @@ import { arrayUnion } from "firebase/firestore";
 import updateData from "../../../firebase/firestore/updateData";
 import { useRouter } from 'next/navigation'
 import { useAuthContext } from "@/src/context/AuthContext";
+import axios from "axios";
+
 
 export default function AddCustomers() {
   const [email, setEmail] = useState("");
@@ -92,7 +94,7 @@ export default function AddCustomers() {
             onChange={(event) => setEmail(event.target.value)}
           />
           <Input
-            type="number"
+            type="tel"
             label="Phone number"
             variant="bordered"
             radius="sm"
