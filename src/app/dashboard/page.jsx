@@ -15,7 +15,7 @@ export default function Home() {
     const { user } = useAuthContext();
     const router = useRouter();
 
-    const [userData, setUserData] = useState({} as any)
+    const [userData, setUserData] = useState({});
 
     // fetch user data from api/user 
     // and update user context
