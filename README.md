@@ -1,7 +1,7 @@
 # Kollect: Streamlining Merchant Payment Management
 
 Welcome to Kollect, the innovative mobile web app designed to revolutionize the way merchants manage payments. This README provides a comprehensive overview of the project, its purpose, features, and future plans.
-
+Note App is only available for mobile view
 ## Table of Contents
 - [Introduction](#introduction)
 - [Problem Statement](#problem-statement)
