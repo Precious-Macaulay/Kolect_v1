@@ -5,6 +5,8 @@ import {
     getAuth,
 } from 'firebase/auth';
 import firebase_app from '@/src/firebase/config';
+import { Spinner } from '@nextui-org/react'
+
 
 const auth = getAuth(firebase_app);
 
@@ -35,7 +37,9 @@ export const AuthContextProvider = ({
 
     return (
         <AuthContext.Provider value={{ user }}>
-            {loading ? <div className="h-screen w-screen p-special-m">Loading...</div> : children}
+            {loading ? <div className="h-screen w-screen p-special-m flex justify-center items-center">
+            <Spinner size="lg" /> {`  loading`}
+            </div> : children}
         </AuthContext.Provider>
     );
 };
