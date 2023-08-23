@@ -1,28 +1,25 @@
 import Image from 'next/image'
 import logo from '@/src/assets/logo.png'
+import { Button } from '@nextui-org/react'
 
 export default function Home() {
   return (
-    <main>
-      <div className='flex flex-row w-full'>
+    <main className='w-full h-full'>
+      <div className='flex flex-row items-center'>
         <Image src={logo}
           width={64}
           height={64}
           alt='logo'
         />
-        <div className='text-4xl'>Kolect</div>
+        <h1 className='text-4xl'>Kolect</h1>
       </div>
-      <div>
-        <div className='text-2xl'>Welcome to Kolect</div>
-        <div className='text-xl'>A payment management</div>
-      </div>
-      <div className='bg-white rounded p-7'>
-        <button className=''>
-          Get Started
-        </button>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+      <div className='bg-white rounded p-7 h-9'>
+        <Button>
           Login
-        </button>
+        </Button>
+        <Button>
+          Create Account
+        </Button>
       </div>
     </main>
   )

@@ -13,6 +13,6 @@
 }
 
 body {
- background-color: rgb(var(--primary-color-rgb));
- padding: 32px;
+  background-color: rgb(var(--primary-color-rgb));
+  padding: 32px;
 }
