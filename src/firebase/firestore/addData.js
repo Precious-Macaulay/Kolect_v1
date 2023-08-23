@@ -16,3 +16,4 @@ export default async function addData(colllection, id, data) {
 
     return { result, error };
 }
+

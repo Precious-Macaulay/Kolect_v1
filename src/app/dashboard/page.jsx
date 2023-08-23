@@ -43,11 +43,11 @@ export default function Home() {
             </DashboardHeader>
             <div className="bg-white w-full m-special-xl rounded-special p-special-m">
                 <h6>Owed Funds</h6>
-                <p className="amount">{`NGN ${!userData?.owed ? (userData?.owed/100).toFixed(2) : `0.00`}`}</p>
+                <p className="amount">{`NGN ${userData?.owed ? (userData?.owed/100).toFixed(2) : `0.00`}`}</p>
             </div>
             <div className="bg-white w-full m-special-x rounded-special p-special-m">
                 <h6>Reserved Funds</h6>
-                <p className="amount">{`NGN ${!userData?.reserved ? (userData?.reserved/100).toFixed(2) : `0.00`}`}</p>
+                <p className="amount">{`NGN ${userData?.reserved ? (userData?.reserved/100).toFixed(2) : `0.00`}`}</p>
             </div>
             <div className="m-special-xl">
                 <h6 className="amount">Quick Links</h6>

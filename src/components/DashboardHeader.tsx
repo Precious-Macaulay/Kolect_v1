@@ -20,10 +20,8 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({ children }) => {
                     </Button>
                 </DropdownTrigger>
                 <DropdownMenu aria-label="Static Actions">
-                    {/* <DropdownItem key="new">New</DropdownItem>
-                    <DropdownItem key="copy">Copy link</DropdownItem>
-                    <DropdownItem key="edit">Edit file</DropdownItem> */}
-                    <DropdownItem key="delete" className="text-danger" color="danger">
+                    <DropdownItem key="settings">Settings</DropdownItem>
+                    <DropdownItem key="logout" className="text-danger" color="danger">
                         Logout
                     </DropdownItem>
                 </DropdownMenu>

@@ -39,7 +39,7 @@ export default function Register() {
             email,
             owed: 0,
             reserved: 0,
-            customer: [ ],
+            customers: [],
         }
         await addData('users', uid, data)
         Swal.fire({
