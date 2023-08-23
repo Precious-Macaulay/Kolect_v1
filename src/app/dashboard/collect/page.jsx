@@ -6,7 +6,7 @@ import { BiSearch } from 'react-icons/bi';
 import { IoIosArrowForward } from 'react-icons/io';
 
 
-export default function () {
+export default function Collect () {
     return (<div className="h-screen w-screen p-special-m">
         <div className='flex justify-between items-center m-special-x'>
             <IoIosArrowBack />

@@ -3,7 +3,7 @@ import { Button, Input } from "@nextui-org/react"
 import Link from "next/link"
 import { IoIosArrowBack } from "react-icons/io"
 
-export default function () {
+export default function Amount () {
     return (
         <div className="h-screen w-screen p-special-m">
             <IoIosArrowBack />

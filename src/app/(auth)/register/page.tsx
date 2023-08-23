@@ -4,7 +4,7 @@ import { Input, Button, Link } from "@nextui-org/react";
 import { useState } from "react";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
-export default function Login() {
+export default function Register() {
     const [isVisible, setIsVisible] = useState(false);
 
     const toggleVisibility = () => setIsVisible(!isVisible);
