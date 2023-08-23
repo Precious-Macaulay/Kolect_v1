@@ -28,8 +28,12 @@ export default function Home() {
 
     // redirect to login if user is not logged in
     useEffect(() => {
-        fetchDoc();
-        if (user == null) router.push("/login")
+
+        if (user == null) {
+            router.push("/login")
+        } else {
+            fetchDoc();
+        }
     }, [user])
 
     return (
