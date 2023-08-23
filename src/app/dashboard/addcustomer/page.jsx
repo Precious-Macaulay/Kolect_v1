@@ -19,12 +19,34 @@ export default function AddCustomers() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    const params = {
+      email: email,
+      first_name: customerName,
+      phone: `${phoneNumber}`,
+    };
+    
+    const headers = {
+      Authorization: 'Bearer sk_test_4fb07c0380a266230aedc1ff577781b198dd24a7',
+      'Content-Type': 'application/json'
+    };
+    
+   const customerData = await axios.post('https://api.paystack.co/customer', params, { headers })
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
     const newCustomer = {
       email: email,
       phoneNumber: phoneNumber,
       customerName: customerName,
       owe: 0,
       reserved: 0,
+      customer_code : customerData.customer_code,
+      id: customerData.id
     };
 
     if (email === "" || phoneNumber === "" || customerName === "") {
