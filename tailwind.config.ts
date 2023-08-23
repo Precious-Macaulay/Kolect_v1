@@ -10,6 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: '#3BB75E'
+      },
     },
   },
   darkMode: "class",

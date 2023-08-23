@@ -14,5 +14,89 @@
 
 body {
   background-color: rgb(var(--primary-color-rgb));
-  padding: 32px;
+}
+
+.p-special{
+  padding: 2.25rem;
+}
+.p-special-m{
+  padding: 1.25rem;
+}
+.p-special-tiny{
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.rounded-special{
+  border-radius: 0.5rem;
+}
+
+.m-special-x{
+  margin-bottom: 0.75rem;
+}
+.m-special-xl{
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.m-special{
+  margin: 1.25rem;
+}
+
+.line-button {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #4a5568;
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.solid-button {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #3BB75E;
+  transition: all 0.2s ease-in-out;
+}
+
+.amount{
+  font-size: large;
+  font-weight: bold;
+}
+
+.quick-link-button{
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 5rem;
+  line-height: 0.75rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #3BB75E;
+  transition: all 0.2s ease-in-out;
+  min-width: 100px;
+  width: 100%;
+}
+.quick-link-button > svg {
+  height: 46px;
+}
+.quick-link-text{
+  font-size: 0.75rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.gap-special{
+  gap: 1.25rem;
+}
+
+.light-text{
+  color: #b9b9b9;
 }
