@@ -43,24 +43,24 @@ export default function Home() {
             </DashboardHeader>
             <div className="bg-white w-full m-special-xl rounded-special p-special-m">
                 <h6>Owed Funds</h6>
-                <p className="amount">{`NGN 0.00`}</p>
+                <p className="amount">{`NGN ${!userData?.owed ? (userData?.owed/100).toFixed(2) : `0.00`}`}</p>
             </div>
             <div className="bg-white w-full m-special-x rounded-special p-special-m">
                 <h6>Reserved Funds</h6>
-                <p className="amount">NGN 0.00</p>
+                <p className="amount">{`NGN ${!userData?.reserved ? (userData?.reserved/100).toFixed(2) : `0.00`}`}</p>
             </div>
             <div className="m-special-xl">
                 <h6 className="amount">Quick Links</h6>
                 <div className="flex w-full justify-between item-center m-special-xl gap-special">
-                    <Button as={Link} className="h-60 flex flex-col justify-center items-center quick-link-button">
+                    <Button href="/dashboard/collect" as={Link} className="h-60 flex flex-col justify-center items-center quick-link-button">
                         <AiOutlineSend />
                         <p className="quick-link-text">Collect <br /> Payment</p>
                     </Button>
-                    <Button as={Link} className="h-60 flex flex-col justify-center items-center quick-link-button">
+                    <Button href="/dashboard/addcustomer" as={Link} className="h-60 flex flex-col justify-center items-center quick-link-button">
                         <GoPersonAdd />
                         <p className="quick-link-text">Add <br />Customer</p>
                     </Button>
-                    <Button as={Link} className="h-60 flex flex-col justify-center items-center quick-link-button">
+                    <Button href="/dashboard/customers" as={Link} className="h-60 flex flex-col justify-center items-center quick-link-button">
                         <LiaUsersSolid />
                         <p className="quick-link-text">Customers</p>
                     </Button>
