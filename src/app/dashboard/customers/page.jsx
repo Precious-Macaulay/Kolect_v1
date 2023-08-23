@@ -31,7 +31,7 @@ export default function Customers() {
 
   useEffect(() => {
     fetchDoc();
-  }, [user]);
+  });
 
   return (
     <div className="h-screen w-screen p-special-m">

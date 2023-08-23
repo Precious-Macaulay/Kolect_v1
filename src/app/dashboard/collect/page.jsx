@@ -32,7 +32,7 @@ export default function Collect() {
   };
   useEffect(() => {
     fetchDoc();
-  }, []);
+  }, [userData]);
 
   return (
     <div className="h-screen w-screen p-special-m">
@@ -53,7 +53,7 @@ export default function Collect() {
         radius="sm"
       />
       {userData?.customers?.map((item) => (
-        <div onClick={handleClick(item)} className="bg-white w-full m-special-xl p-special-tiny flex justify-between items-center">
+        <div onClick={handleClick(item)} key={item.owed} className="bg-white w-full m-special-xl p-special-tiny flex justify-between items-center">
           <div
             className="flex flex-row items-center gap-special"
             

@@ -34,7 +34,7 @@ export default function Home() {
         } else {
             fetchDoc();
         }
-    }, [user])
+    }, [user, router])
 
     return (
         <div className="h-screen w-screen p-special-m">
