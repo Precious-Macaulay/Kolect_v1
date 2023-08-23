@@ -14,7 +14,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({ children }) => {
                 <DropdownTrigger>
                     <Button
                     as="span" 
-                    color='none'
+                    color={undefined}
                     >
                        <RxHamburgerMenu />
                     </Button>
