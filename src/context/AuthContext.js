@@ -35,7 +35,7 @@ export const AuthContextProvider = ({
 
     return (
         <AuthContext.Provider value={{ user }}>
-            {loading ? <div>Loading...</div> : children}
+            {loading ? <div className="h-screen w-screen p-special-m">Loading...</div> : children}
         </AuthContext.Provider>
     );
 };

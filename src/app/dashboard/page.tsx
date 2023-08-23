@@ -4,17 +4,31 @@ import { Button, Link } from "@nextui-org/react";
 import { AiOutlineSend } from "react-icons/ai";
 import { GoPersonAdd } from "react-icons/go";
 import { LiaUsersSolid } from "react-icons/lia";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "@/src/context/AuthContext";
 import { useRouter } from 'next/navigation'
+import axios from "axios";
 
 
 
 export default function Home() {
     const { user } = useAuthContext();
-    const router = useRouter()
+    const router = useRouter();
 
+    const [userData, setUserData] = useState({} as any)
+
+    // fetch user data from api/user 
+    // and update user context
+
+    const fetchDoc = async () => {
+        const { data } = await axios.get(`/api/user/${user?.uid}`)
+        console.log(data)
+        setUserData(data)
+    }
+
+    // redirect to login if user is not logged in
     useEffect(() => {
+        fetchDoc();
         if (user == null) router.push("/login")
     }, [user])
 
@@ -25,7 +39,7 @@ export default function Home() {
             </DashboardHeader>
             <div className="bg-white w-full m-special-xl rounded-special p-special-m">
                 <h6>Owed Funds</h6>
-                <p className="amount">NGN 0.00</p>
+                <p className="amount">{`NGN 0.00`}</p>
             </div>
             <div className="bg-white w-full m-special-x rounded-special p-special-m">
                 <h6>Reserved Funds</h6>
@@ -57,4 +71,8 @@ export default function Home() {
             </div>
         </div>
     )
+}
+
+function fetchDoc() {
+    throw new Error("Function not implemented.");
 }

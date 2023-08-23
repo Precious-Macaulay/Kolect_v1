@@ -36,7 +36,10 @@ export default function Register() {
         const data = {
             businessName,
             terminalID,
-            email
+            email,
+            owed: 0,
+            reserved: 0,
+            customer: [ ],
         }
         await addData('users', uid, data)
         Swal.fire({
