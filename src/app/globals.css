@@ -100,3 +100,7 @@ body {
 .light-text{
   color: #b9b9b9;
 }
+
+.small-text{
+  font-size: 10px;
+}
