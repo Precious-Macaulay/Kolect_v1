@@ -5,6 +5,7 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { Input, Button, Link } from "@nextui-org/react";
 import login from '@/src/firebase/auth/login'
 import { useRouter } from 'next/navigation'
+import Swal from 'sweetalert2'
 
 
 
@@ -23,11 +24,22 @@ export default function Login() {
         const { result, error } = await login(email, password);
 
         if (error) {
-            return console.log(error)
+            return Swal.fire({
+                title: 'Error!',
+                text: error,
+                icon: 'error',
+                confirmButtonText: 'Try Again'
+            })
         }
 
         // else successful
-        console.log(result)
+        Swal.fire({
+            title: 'Success!',
+            text: 'You have logged in successfully',
+            icon: 'success',
+            confirmButtonText: 'Continue'
+        })
+        
         return router.push("/dashboard")
     }
 

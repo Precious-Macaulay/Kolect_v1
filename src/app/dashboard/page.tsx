@@ -4,9 +4,20 @@ import { Button, Link } from "@nextui-org/react";
 import { AiOutlineSend } from "react-icons/ai";
 import { GoPersonAdd } from "react-icons/go";
 import { LiaUsersSolid } from "react-icons/lia";
+import { useEffect } from "react";
+import { useAuthContext } from "@/src/context/AuthContext";
+import { useRouter } from 'next/navigation'
+
 
 
 export default function Home() {
+    const { user } = useAuthContext();
+    const router = useRouter()
+
+    useEffect(() => {
+        if (user == null) router.push("/login")
+    }, [user])
+
     return (
         <div className="h-screen w-screen p-special-m">
             <DashboardHeader>

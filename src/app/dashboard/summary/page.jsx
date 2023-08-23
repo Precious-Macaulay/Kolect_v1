@@ -1,19 +1,8 @@
 'use client'
 import TitleBar from "../../../components/TitleBar"
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Link } from "@nextui-org/react";
-import { useAuthContext } from "@/src/context/AuthContext";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export default function Summary() {
-
-    const { user } = useAuthContext();
-    const router = useRouter()
-
-    useEffect(() => {
-        if (user == null) router.push("/login")
-    }, [user])
-
 
     return (<div className="h-screen w-screen p-special-m">
         <TitleBar>Summary</TitleBar>

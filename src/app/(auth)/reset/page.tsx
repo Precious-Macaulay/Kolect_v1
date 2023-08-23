@@ -3,19 +3,34 @@ import TitleBar from "@/src/components/TitleBar";
 import { Input, Button } from "@nextui-org/react";
 import { useState } from "react";
 import reset from '@/src/firebase/auth/reset'
+import Swal from 'sweetalert2'
+import { useRouter } from 'next/router'
 
 export default function Reset() {
     const [email, setEmail] = useState('')
+    const router = useRouter();
 
     const handleForm = async () => {
         const { result, error } = await reset(email);
 
         if (error) {
-            return console.log(error)
+            return Swal.fire({
+                title: 'Error!',
+                text: error,
+                icon: 'error',
+                confirmButtonText: 'Try Again'
+            })
         }
 
         // else successful
-        console.log(result)
+        Swal.fire({
+            title: 'Success!',
+            text: 'A password reset link has been sent to your email',
+            icon: 'success',
+            confirmButtonText: 'Continue'
+        })
+
+        return router.push("/login")
     }
 
     return (<div className='w-screen h-screen p-special-m'>

@@ -9,7 +9,7 @@ export default async function reset(email) {
     try {
         result = await sendPasswordResetEmail(auth, email);
     } catch (e) {
-        error = e;
+        error = e.message;
     }
 
     return { result, error };

@@ -1,10 +1,12 @@
 'use client'
 import TitleBar from "@/src/components/TitleBar";
-import { Input, Button, Link } from "@nextui-org/react";
+import { Input, Button } from "@nextui-org/react";
 import { useState } from "react";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useRouter } from 'next/navigation'
 import register from '@/src/firebase/auth/register'
+import addData from '@/src/firebase/firestore/addData'
+import Swal from 'sweetalert2'
 
 export default function Register() {
     const [isVisible, setIsVisible] = useState(false);
@@ -21,11 +23,28 @@ export default function Register() {
         const { result, error } = await register(email, password);
 
         if (error) {
-            return console.log(error)
+            return Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'Try Again'
+            })
         }
 
         // else successful
-        console.log(result)
+        const uid = result?.user?.uid;
+        const data = {
+            businessName,
+            terminalID,
+            email
+        }
+        await addData('users', uid, data)
+        Swal.fire({
+            title: 'Success!',
+            text: 'Your account has been created successfully',
+            icon: 'success',
+            confirmButtonText: 'Continue'
+        })
         return router.push("/dashboard")
     }
 
