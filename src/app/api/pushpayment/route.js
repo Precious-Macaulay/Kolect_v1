@@ -4,7 +4,7 @@ import axios from "axios";
 export async function POST(request) {
   try {
     console.log("Received request:", request);
-    
+
     const req = await request.json();
     console.log("Request JSON:", req);
 
@@ -66,19 +66,29 @@ export async function POST(request) {
         console.log("Verification Data:", verify.data);
 
         if (verify.data.delivered) {
-          return NextResponse.json({ message: "Invoice sent, complete payment in terminal" });
+          return NextResponse.json({
+            message: "Invoice sent, complete payment in terminal",
+          });
         } else {
-          return NextResponse.json({ message: "Invoice sent, but payment not completed in terminal" });
+          return NextResponse.json({
+            message: "Invoice sent, but payment not completed in terminal",
+          });
         }
       } else {
-        return NextResponse.json({ message: "Failed to push invoice to terminal" });
+        return NextResponse.json({
+          message: "Failed to push invoice to terminal",
+        });
       }
     } else {
-      return NextResponse.json({ message: "Terminal is not available or online" });
+      return NextResponse.json({
+        message: "Terminal is not available or online",
+      });
     }
-
   } catch (error) {
-    console.error("something messed up",error.response.data.message,);
-    return NextResponse.json({ message: "An error occurred during payment processing" });
+    console.error("something messed up", error.response.data.message);
+    return NextResponse.json(
+      { error: error.response.data.message },
+      { status: error.response.status }
+    );
   }
 }

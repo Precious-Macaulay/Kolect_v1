@@ -45,9 +45,11 @@ export default function Summary({ searchParams }) {
         });
       })
       .catch((err) => {
+
         Swal.fire({
-          title: "Payment Failed",
+          title: "Error Occured",
           icon: "error",
+          text: err.response.data.error,
           confirmButtonText: "OK",
         });
       });
