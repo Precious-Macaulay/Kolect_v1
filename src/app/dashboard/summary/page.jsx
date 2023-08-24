@@ -14,6 +14,9 @@ import axios from "axios";
 import { useAuthContext } from "@/src/context/AuthContext";
 import { useEffect, useState } from "react";
 import { Spinner } from "@nextui-org/react";
+import updateData from "../../../firebase/firestore/updateData";
+import { arrayUnion, arrayRemove } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 
 export default function Summary({ searchParams }) {
   const customer = searchParams;
@@ -21,38 +24,110 @@ export default function Summary({ searchParams }) {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
+
   const fetchDoc = async () => {
     const { data } = await axios.get(`/api/user/${user?.uid}`);
-
     setUserData(data);
   };
 
   const handleClick = async () => {
     setLoading(true);
-    // make a post request to server to update the customer data
-    await axios
-      .post("/api/pushpayment", {
-        uid: user?.uid,
-        terminalId: userData.terminalID,
-        customer,
-      })
-      .then((res) => {
+
+    // create the previous customer data
+    let previousCustomerData = () => {
+      let data = {};
+      userData.customers.forEach((item) => {
+        if (item.id === customer.id) {
+          data = item;
+        }
+      });
+      return data;
+    };
+
+    let newCustomerData = () => {
+      let data = {};
+      userData?.customers?.forEach((item) => {
+        if (item.id === customer.id) {
+          data = {
+            ...item,
+            reserved: eval(`${item.reserved} + ${customer.reserved}`),
+            owe: eval(`${item.owe} + ${customer.owe}`),
+          };
+        }
+      });
+      return data;
+    };
+    const prevCustomer = previousCustomerData();
+    const newCustomer = newCustomerData();
+    const newReserved = eval(`${userData.reserved} + ${customer.reserved}`);
+    const newOwed = eval(`${userData.owed} + ${customer.owe}`);
+
+    if (customer.toPay == 0) {
+      if (customer.spent != 0) {
+        const { result, error } = await updateData("users", user?.uid, {
+          reserved: newReserved,
+          owed: newOwed,
+          customers: arrayRemove(prevCustomer),
+        });
+
+        const { result: result2, error: error2 } = await updateData(
+          "users",
+          user?.uid,
+          {
+            customers: arrayUnion(newCustomer),
+          }
+        );
+
+        if (error || error2) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error.message || error2.message,
+          });
+          return setLoading(false);
+        } else {
+          Swal.fire({
+            title: "Balance updated",
+            icon: "success",
+            text: "No payment required",
+            confirmButtonText: "OK",
+          });
+          router.push('/dashboard')
+        }
+      } else {
         Swal.fire({
           title: "Payment Successful",
           icon: "success",
-          text: res.data.message,
+          text: "No payment required",
           confirmButtonText: "OK",
         });
-      })
-      .catch((err) => {
-
-        Swal.fire({
-          title: "Error Occured",
-          icon: "error",
-          text: err.response.data.error,
-          confirmButtonText: "OK",
+        router.push('/dashboard')
+      }
+    } else {
+      await axios
+        .post("/api/pushpayment", {
+          uid: user?.uid,
+          terminalId: userData.terminalID,
+          customer,
+        })
+        .then((res) => {
+          Swal.fire({
+            title: "Payment Successful",
+            icon: "success",
+            text: res.data.message,
+            confirmButtonText: "OK",
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "Error Occured",
+            icon: "error",
+            text: err.response.data.error,
+            confirmButtonText: "OK",
+          });
         });
-      });
+    }
   };
 
   useEffect(() => {
@@ -97,7 +172,7 @@ export default function Summary({ searchParams }) {
         color="primary"
         auto
       >
-        {loading && <Spinner />}
+        {loading && <Spinner size="md" />}
         Pay
       </Button>
     </div>

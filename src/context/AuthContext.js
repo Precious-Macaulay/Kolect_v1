@@ -38,7 +38,7 @@ export const AuthContextProvider = ({
     return (
         <AuthContext.Provider value={{ user }}>
             {loading ? <div className="h-screen w-screen p-special-m flex justify-center items-center">
-            <Spinner size="lg" /> {`  loading`}
+            <Spinner size="lg" label={`Loading...`}/> 
             </div> : children}
         </AuthContext.Provider>
     );

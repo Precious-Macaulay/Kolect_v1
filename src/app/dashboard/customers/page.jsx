@@ -51,13 +51,11 @@ export default function Customers() {
       />
       {userData?.customers?.map((item) => (
         <div
+          onClick={handleClick(item)}
           key={item.owe}
           className="bg-white w-full m-special-xl p-special-tiny flex justify-between items-center"
         >
-          <div
-            className="flex flex-row items-center gap-special"
-            onClick={handleClick(item)}
-          >
+          <div className="flex flex-row items-center gap-special">
             <Avatar />
             <div>
               <h1 className="small-text">{`${item.firstName} ${item.lastName}`}</h1>

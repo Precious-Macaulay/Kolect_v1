@@ -5,6 +5,7 @@ import logo from '@/src/assets/logo.png'
 import { Button, Link } from '@nextui-org/react'
 
 export default function Home() {
+  
   return (
     <main className='w-screen h-screen flex flex-col justify-between items-center'>
       <div>

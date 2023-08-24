@@ -83,7 +83,7 @@ export default function Home() {
         </div>
       </div>
       <div className="m-special-xl">
-        <h6 className="amount">Recent Transactions</h6>
+        {/* <h6 className="amount">Recent Transactions</h6> */}
         {/* <div className="bg-white w-full m-special-xl p-special-tiny flex justify-between items-center">
                     <div><h1 className="amount">NGN 100</h1><p className="light-text">Bola Ahmed</p></div>
                     <div><p className="light-text">11:45pm , Feb 22</p></div>
@@ -97,9 +97,9 @@ export default function Home() {
                 ))} */}
         {/* no transaction data */}
 
-        {userData?.transactions?.length === 0 && (
+        {/* {userData?.transactions?.length === 0 && (
           <p className="light-text">No recent transactions</p>
-        )}
+        )} */}
       </div>
     </div>
   );

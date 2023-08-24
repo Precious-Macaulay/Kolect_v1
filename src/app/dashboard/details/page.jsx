@@ -39,7 +39,7 @@ export default function Details({ searchParams }) {
           </TableRow>
           <TableRow key="4">
             <TableCell>Owed</TableCell>
-            <TableCell>{`NGN ${(details.owed / 100).toFixed(2)}`}</TableCell>
+            <TableCell>{`NGN ${(details.owe / 100).toFixed(2)}`}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
