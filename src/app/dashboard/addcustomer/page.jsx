@@ -5,10 +5,9 @@ import { Input, Button } from "@nextui-org/react";
 import Swal from "sweetalert2";
 import { arrayUnion } from "firebase/firestore";
 import updateData from "../../../firebase/firestore/updateData";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/src/context/AuthContext";
 import axios from "axios";
-
 
 export default function AddCustomers() {
   const [email, setEmail] = useState("");
@@ -29,20 +28,22 @@ export default function AddCustomers() {
       last_name: lastName,
       phone: `${phoneNumber}`,
     };
-    
+
     const headers = {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY}`,
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     };
-    
-   const customerData = await axios.post('https://api.paystack.co/customer', params, { headers })
-      .then(response => {
-        console.log(response.data)
+
+    const customerData = await axios
+      .post("https://api.paystack.co/customer", params, { headers })
+      .then((response) => {
+        console.log(response.data);
         return response.data;
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
+    console.log(customerData);
 
     const newCustomer = {
       email: email,
@@ -51,11 +52,16 @@ export default function AddCustomers() {
       lastName: lastName,
       owe: 0,
       reserved: 0,
-      customer_code : customerData.customer_code,
-      id: customerData.id
+      customer_code: customerData.data.customer_code,
+      id: customerData.data.id,
     };
-
-    if (email === "" || phoneNumber === "" || firstName === "" || lastName === "") {
+    console.log(newCustomer);
+    if (
+      email === "" ||
+      phoneNumber === "" ||
+      firstName === "" ||
+      lastName === "" 
+    ) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -69,7 +75,7 @@ export default function AddCustomers() {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Something went wrong",
+          text: error.message,
         });
         return;
       } else {
