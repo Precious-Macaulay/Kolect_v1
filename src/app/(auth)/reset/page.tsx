@@ -36,7 +36,7 @@ export default function Reset() {
     return (<div className='w-screen h-screen p-special-m'>
         <TitleBar>Reset Password</TitleBar>
         <div className="bg-white p-special-m m-special-xl rounded-sm">
-            <Input value={email} onChange={(e)=>{setEmail(e.target.value)}} type="text" label='Email' variant="bordered" radius="sm" className="max-w-xs m-special-x" />
+            <Input value={email} onChange={(e)=>{setEmail(e.target.value)}} type="text" label='Email' variant="bordered" radius="sm" className=" m-special-x" />
             <Button className="solid-button w-full h-14 m-special-x" onClick={handleForm}
             >Reset</Button>
         </div>

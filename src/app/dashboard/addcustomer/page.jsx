@@ -99,7 +99,7 @@ export default function AddCustomers() {
             label="Email"
             variant="bordered"
             radius="sm"
-            className="max-w-xs m-special-x"
+            className="m-special-x"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
@@ -108,7 +108,7 @@ export default function AddCustomers() {
             label="Phone number"
             variant="bordered"
             radius="sm"
-            className="max-w-xs m-special-x"
+            className="m-special-x"
             value={phoneNumber}
             onChange={(event) => setPhoneNumber(event.target.value)}
           />
@@ -117,7 +117,7 @@ export default function AddCustomers() {
             label="First Name"
             variant="bordered"
             radius="sm"
-            className="max-w-xs m-special-x"
+            className="m-special-x"
             value={firstName}
             onChange={(event) => setFirstName(event.target.value)}
           />
@@ -126,7 +126,7 @@ export default function AddCustomers() {
             label="Last Name"
             variant="bordered"
             radius="sm"
-            className="max-w-xs m-special-x"
+            className="m-special-x"
             value={lastName}
             onChange={(event) => setLastName(event.target.value)}
           />

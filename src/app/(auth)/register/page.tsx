@@ -54,7 +54,7 @@ export default function Register() {
     return (<div className='w-screen h-screen p-special-m'>
         <TitleBar>Create Account</TitleBar>
         <div className="bg-white p-special-m m-special-xl rounded-sm">
-            <Input value={email} onChange={(e) => setEmail(e.target.value)} type="text" label='Email' variant="bordered" radius="sm" className="max-w-xs m-special-x" />
+            <Input value={email} onChange={(e) => setEmail(e.target.value)} type="text" label='Email' variant="bordered" radius="sm" className=" m-special-x" />
             <Input value={password} onChange={(e) => setPassword(e.target.value)} label='Password' variant="bordered" radius="sm" endContent={
                 <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
                     {isVisible ? (
@@ -64,11 +64,11 @@ export default function Register() {
                     )}
                 </button>
             }
-                type={isVisible ? "text" : "password"} className="max-w-xs m-special-x" />
+                type={isVisible ? "text" : "password"} className=" m-special-x" />
             <Input onChange={(e) => {
                 setBusinessName(e.target.value)
-            }} value={businessName} type="text" label='Business Name' variant="bordered" radius="sm" className="max-w-xs m-special-x" />
-            <Input value={terminalID} onChange={(e) => { setTerminalID(e.target.value) }} type="text" label='POS Terminal ID' variant="bordered" radius="sm" className="max-w-xs m-special-x" />
+            }} value={businessName} type="text" label='Business Name' variant="bordered" radius="sm" className=" m-special-x" />
+            <Input value={terminalID} onChange={(e) => { setTerminalID(e.target.value) }} type="text" label='POS Terminal ID' variant="bordered" radius="sm" className=" m-special-x" />
             <Button className="solid-button w-full h-14 m-special-x" onClick={handleForm}>Create An Account</Button>
         </div>
     </div>
