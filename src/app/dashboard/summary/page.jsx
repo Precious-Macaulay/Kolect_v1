@@ -10,17 +10,52 @@ import {
   TableCell,
   Button,
 } from "@nextui-org/react";
+import axios from "axios";
+import { useAuthContext } from "@/src/context/AuthContext";
+import { useEffect, useState } from "react";
+import { Spinner } from "@nextui-org/react";
 
 export default function Summary({ searchParams }) {
   const customer = searchParams;
-  const handleClick = () => {
-   Swal.fire({
-      title: "Payment Successful",
-      icon: "success",
-      confirmButtonText: "OK",
-    });
+  const { user } = useAuthContext();
+  const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const fetchDoc = async () => {
+    const { data } = await axios.get(`/api/user/${user?.uid}`);
+
+    setUserData(data);
   };
 
+  const handleClick = async () => {
+    setLoading(true);
+    // make a post request to server to update the customer data
+    await axios
+      .post("/api/pushpayment", {
+        uid: user?.uid,
+        terminalId: userData.terminalID,
+        customer,
+      })
+      .then((res) => {
+        Swal.fire({
+          title: "Payment Successful",
+          icon: "success",
+          text: res.message,
+          confirmButtonText: "OK",
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Payment Failed",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      });
+  };
+
+  useEffect(() => {
+    fetchDoc();
+  });
   return (
     <div className="h-screen w-screen p-special-m">
       <TitleBar>Summary</TitleBar>
@@ -60,6 +95,7 @@ export default function Summary({ searchParams }) {
         color="primary"
         auto
       >
+        {loading && <Spinner />}
         Pay
       </Button>
     </div>

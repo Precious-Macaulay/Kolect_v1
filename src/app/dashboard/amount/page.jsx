@@ -16,6 +16,7 @@ export default function Amount({ searchParams }) {
   const balanceUpdate = (customer, spent, toPay) => {
     let owedBalance = customer.owe;
     let reservedBalance = customer.reserved;
+    console.log(owedBalance, reservedBalance);
     if (spent > toPay && owedBalance >= 0) {
       owedBalance += (spent - toPay) * 100;
     } else if (spent < toPay && reservedBalance >= 0) {
