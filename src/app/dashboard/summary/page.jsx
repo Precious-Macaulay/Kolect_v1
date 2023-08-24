@@ -40,7 +40,7 @@ export default function Summary({ searchParams }) {
         Swal.fire({
           title: "Payment Successful",
           icon: "success",
-          text: res.message,
+          text: res.data.message,
           confirmButtonText: "OK",
         });
       })
