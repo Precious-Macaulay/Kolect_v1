@@ -13,7 +13,8 @@ import axios from "axios";
 export default function AddCustomers() {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [customerName, setCustomerName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const router = useRouter();
   const { user } = useAuthContext();
 
@@ -24,17 +25,19 @@ export default function AddCustomers() {
 
     const params = {
       email: email,
-      first_name: customerName,
+      first_name: firstName,
+      last_name: lastName,
       phone: `${phoneNumber}`,
     };
     
     const headers = {
-      Authorization: 'Bearer sk_test_4fb07c0380a266230aedc1ff577781b198dd24a7',
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY}`,
       'Content-Type': 'application/json'
     };
     
    const customerData = await axios.post('https://api.paystack.co/customer', params, { headers })
       .then(response => {
+        console.log(response.data)
         return response.data;
       })
       .catch(error => {
@@ -44,14 +47,15 @@ export default function AddCustomers() {
     const newCustomer = {
       email: email,
       phoneNumber: phoneNumber,
-      customerName: customerName,
+      firstName: firstName,
+      lastName: lastName,
       owe: 0,
       reserved: 0,
       customer_code : customerData.customer_code,
       id: customerData.id
     };
 
-    if (email === "" || phoneNumber === "" || customerName === "") {
+    if (email === "" || phoneNumber === "" || firstName === "" || lastName === "") {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -104,12 +108,21 @@ export default function AddCustomers() {
           />
           <Input
             type="text"
-            label="Customer Name"
+            label="First Name"
             variant="bordered"
             radius="sm"
             className="max-w-xs m-special-x"
-            value={customerName}
-            onChange={(event) => setCustomerName(event.target.value)}
+            value={firstName}
+            onChange={(event) => setFirstName(event.target.value)}
+          />
+          <Input
+            type="text"
+            label="Last Name"
+            variant="bordered"
+            radius="sm"
+            className="max-w-xs m-special-x"
+            value={lastName}
+            onChange={(event) => setLastName(event.target.value)}
           />
           <Button
             type="submit"

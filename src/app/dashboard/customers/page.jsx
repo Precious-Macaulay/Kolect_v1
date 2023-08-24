@@ -60,7 +60,7 @@ export default function Customers() {
           >
             <Avatar />
             <div>
-              <h1 className="small-text">{item.customerName}</h1>
+              <h1 className="small-text">{`${item.firstName} ${item.lastName}`}</h1>
               <p className="light-text small-text">{item.email}</p>
             </div>
           </div>
