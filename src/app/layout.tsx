@@ -7,8 +7,8 @@ import { AuthContextProvider } from '@/src/context/AuthContext'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Kolect',
-  description: 'A payment management',
+  title: 'Kollect',
+  description: 'A payment management mobile app for the modern world.',
 }
 
 export default function RootLayout({

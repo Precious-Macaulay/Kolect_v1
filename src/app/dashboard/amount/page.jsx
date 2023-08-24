@@ -3,6 +3,7 @@ import { Button, Input } from "@nextui-org/react";
 import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function Amount({ searchParams }) {
   const [spent, setSpent] = useState();
@@ -16,29 +17,39 @@ export default function Amount({ searchParams }) {
     let owedBalance = customer.owe;
     let reservedBalance = customer.reserved;
     if (spent > toPay && owedBalance >= 0) {
-      owedBalance += eval(`${spent} - ${toPay}`);
+      owedBalance += (spent - toPay) * 100;
     } else if (spent < toPay && reservedBalance >= 0) {
-      reservedBalance += eval(`${toPay} - ${spent}`);
+      reservedBalance += (toPay - spent) * 100;
     }
     return {
       ...customer,
       owe: owedBalance,
       reserved: reservedBalance,
-      spent: spent,
-      toPay: toPay,
+      spent: spent * 100,
+      toPay: toPay * 100,
     };
   };
   const handleClick = () => {
-    const customerData = balanceUpdate(customer, spent*100, toPay * 100);
-    const param = new URLSearchParams(customerData).toString();
-    const url = `/dashboard/summary?${param}`;
-    router.push(url);
+    const validation = validateInput(spent) && validateInput(toPay);
+    if (!validation) {
+      Swal.fire({
+        title: "Invalid Input",
+        text: "Please enter a valid amount",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      return;
+    } else {
+      const customerData = balanceUpdate(customer, spent, toPay);
+      const param = new URLSearchParams(customerData).toString();
+      const url = `/dashboard/summary?${param}`;
+      router.push(url);
+    }
   };
 
   //function that make sure input amount is not more than 2 decimal places
-  const validateInput = (e) => {
+  const validateInput = (input) => {
     const regex = /^\d*\.?\d{0,2}$/;
-    const input = e.target.value;
     if (regex.test(input)) {
       return true;
     } else {
@@ -46,18 +57,10 @@ export default function Amount({ searchParams }) {
     }
   };
 
-  // function that make sure the input amount is always 2 decimal places and add a zero if the input is a whole number
-  const formatInput = (e) => {
-    const input = e.target.value;
-    if (input.includes(".")) {
-      const parts = input.split(".");
-      if (parts[1].length > 2) {
-        e.target.value = `${parts[0]}.${parts[1].slice(0, 2)}`;
-      }
-    } else {
-      e.target.value = `${input}.00`;
-    }
-  };
+  // //function that convert the amount to kobo even if the user enters in naira
+  // const convertToKobo = (amount) => {
+  //   return amount * 100;
+  // };
 
   return (
     <div className="h-screen w-screen p-special-m">
@@ -71,9 +74,7 @@ export default function Amount({ searchParams }) {
           size="lg"
           className="text-center"
           value={spent}
-          onChange={(e) =>
-            validateInput(e) && formatInput(e) && setSpent(e.target.value)
-          }
+          onChange={(e) => setSpent(e.target.value)}
         />
         <p className="m-special-x">NGN</p>
       </div>
@@ -86,9 +87,7 @@ export default function Amount({ searchParams }) {
           size="lg"
           className="text-center"
           value={toPay}
-          onChange={(e) =>
-            validateInput(e) && formatInput(e) && setToPay(e.target.value)
-          }
+          onChange={(e) => setToPay(e.target.value)}
         />
         <p className="m-special">NGN</p>
       </div>

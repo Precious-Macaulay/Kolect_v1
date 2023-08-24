@@ -30,7 +30,7 @@ export default function Summary({ searchParams }) {
       >
         <TableHeader>
           <TableColumn>Customer Name</TableColumn>
-          <TableColumn>{customer.customerName}</TableColumn>
+          <TableColumn>{`${customer.firstName} ${customer.lastName}`}</TableColumn>
         </TableHeader>
         <TableBody>
           <TableRow key="1">
